@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Flashlight : MonoBehaviour
 {
+    public AudioSource source;
+    public AudioClip switchOn;
+    public AudioClip switchOff;
+
     [SerializeField] GameObject spotlight;
     private bool flashlightActive;
 
-    // Start is called before the first frame update
     void Start()
     {
         spotlight.gameObject.SetActive(false);
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -21,11 +24,15 @@ public class Flashlight : MonoBehaviour
             {
                 spotlight.gameObject.SetActive(true);
                 flashlightActive = true;
+
+                source.PlayOneShot(switchOn);
             }
             else
             {
                 spotlight.gameObject.SetActive(false);
                 flashlightActive = false;
+
+                source.PlayOneShot(switchOff);
             }
         }       
     }
